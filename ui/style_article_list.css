@@ -1,0 +1,43 @@
+
+.container{
+  border-radius: 5px;
+  color:black;
+  box-sizing: border-box;
+  margin: 5px auto;
+  margin-bottom: 15px;
+  padding:20px;
+  width:90%;
+  background: rgba(0, 0, 0, 0.3);
+
+}
+.container:hover{
+background:rgba(0, 0, 0, 0.5);
+}
+
+.article{
+  height:inherit;
+  display:block;
+  width:100%;
+  float:left;
+}
+.imageholder{
+  display: block;
+  float: left;
+  max-width: 150px;
+  height: 150px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #666666;
+}
+
+.heading{
+  overflow:hidden;
+  margin-left:180px;
+  width:auto;
+  height:180px;
+}
+.continue{
+  display:block;
+  //float:right;
+  text-align:right;
+}
