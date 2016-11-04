@@ -5,7 +5,7 @@ function about(){
     if(this.readystate==4 && this.status==200){
       element.innerHTML=this.responseText;
     }
-  }
+  };
   req1.open('GET','/about',true);
   req1.send();
 }
