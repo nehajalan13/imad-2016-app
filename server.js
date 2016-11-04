@@ -56,6 +56,38 @@ app.get('/about',function(req,res){
   res.send(about);
 });
 
+app.get('/articles',function(req,res){
+  var articles=`<div class="container">
+        <div class="article">
+          <div class="imageholder">
+            <img src ="ui/img.gif" alt>
+          </div>
+          <div class="heading">
+            <h2>Lorem Ipsum</h2>
+					<br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vivamus varius egestas lectus et mollis. Donec tempor dapibus mauris, nec commodo felis volutpat et.
+              Vestibulum a neque imperdiet, sodales quam ut, eleifend lorem. Cras dictum finibus condimentum.
+              Etiam egestas lobortis erat in pharetra. Cras eget ornare lorem, et sollicitudin tortor.
+              Vivamus gravida nunc vel erat maximus, ut sodales lacus pretium. Suspendisse potenti.
+            </p>
+            <p>
+              In sit amet nunc turpis. Vivamus elementum, dui ac eleifend ultricies, erat diam dignissim magna,
+              in feugiat nulla diam ut ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean tristique porttitor dolor, sed blandit metus blandit non. Donec eu tellus lacus.
+            </p>
+          </div>
+          <p class="continue">
+            <a href="$$$$$$$">Continue Reading...</a>
+          </p>
+        </div>
+        <br>
+        <div id="caption">
+          //Image Caption
+        </div>
+      </div>`;
+  res.send(articles);
+});
+
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
 app.listen(8080, function () {
   console.log(`IMAD course app listening on port ${port}!`);
