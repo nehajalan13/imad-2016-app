@@ -9,12 +9,12 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'common.html'));
 });
 
-app.get('/main.js', function (req, res) {
+app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
 
-app.get('/common.css', function (req, res) {
+app.get('/ui/common.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'common.css'));
 });
 app.get('/home.css', function (req, res) {
