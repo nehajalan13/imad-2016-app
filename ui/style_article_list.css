@@ -38,6 +38,5 @@ background:rgba(0, 0, 0, 0.5);
 }
 .continue{
   display:block;
-  //float:right;
   text-align:right;
 }
