@@ -5,6 +5,12 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'common.html'));
+});
+
+
+
 app.get('/common.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'common.css'));
 });
@@ -26,7 +32,7 @@ app.get('/style_article_list.css', function (req, res) {
 app.get('/style_login.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_login.css'));
 });
-app.get('i/style_profile.css', function (req, res) {
+app.get('/style_profile.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
 });
 
