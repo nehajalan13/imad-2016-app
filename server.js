@@ -20,22 +20,22 @@ app.get('/ui/common.css', function (req, res) {
 app.get('/home.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'home.css'));
 });
-app.get('/style_about.css', function (req, res) {
+app.get('/ui/style_about.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_about.css'));
 });
-app.get('/style_add_articles.css', function (req, res) {
+app.get('/ui/style_add_articles.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style__add_articles.css'));
 });
-app.get('/style_article.css', function (req, res) {
+app.get('/ui/style_article.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_article.css'));
 });
-app.get('/style_article_list.css', function (req, res) {
+app.get('/ui/style_article_list.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_article_list.css'));
 });
-app.get('/style_login.css', function (req, res) {
+app.get('/ui/style_login.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_login.css'));
 });
-app.get('/style_profile.css', function (req, res) {
+app.get('/ui/style_profile.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
 });
 app.get('/img.gif', function (req, res) {
