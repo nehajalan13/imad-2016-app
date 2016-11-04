@@ -1,5 +1,5 @@
 function about(){
-  var element=document.getElementsById('row3');
+  var element=document.getElementById('row3');
   var req1=new XMLHttpRequest();
   req1.onreadysrtatechange=function(){
     if(this.readystate==4 && this.status==200){
