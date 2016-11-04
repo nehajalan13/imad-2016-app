@@ -13,7 +13,6 @@ app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
-
 app.get('/ui/common.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'common.css'));
 });
@@ -45,7 +44,7 @@ app.get('/img.gif', function (req, res) {
 app.get('/about',function(req,res){
   var about=`<p>
           about
-        </p>`
+        </p>`;
   res.send(about);
 });
 
