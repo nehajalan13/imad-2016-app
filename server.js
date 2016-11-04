@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'common.html'));
 });
 
-app.get('/ui/main.js', function (req, res) {
+app.get('/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
@@ -37,6 +37,9 @@ app.get('/style_login.css', function (req, res) {
 });
 app.get('/style_profile.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
+});
+app.get('/img.gif', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'img.gif'));
 });
 
 app.get('/about',function(req,res){
