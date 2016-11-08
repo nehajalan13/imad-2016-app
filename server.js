@@ -1,21 +1,175 @@
+/*-----import packages-----*/
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool = require('pg').Pool;
 
 var app = express();
 app.use(morgan('combined'));
 
+
+/*-----database connection-----*/
+var config={
+	user:'postgres',
+	database:'jaxstronomer',
+	host:'localhost',
+	port:'5432',
+	password: 'toor'
+};
+var pool = new Pool(config);
+
+
+/*-----serving articles from article list (on click)-----*/
+app.get('/article',function(req,res){
+	pool.query('SELECT * FROM article',function(err,result){
+    if(err){
+      res.status(500).send(err.toString());
+    }
+    else{
+      var article=result.rows[0];
+      res.send(articleTemplate(article));
+    }
+	});
+});
+
+function articleTemplate(data){
+  var heading=data.heading;
+  var date=data.date;
+  var content=data.content;
+  var article=`<div class="article2">
+  			<div id="heading">
+        	<h1>${heading}<h1>
+  			</div>
+  			<div id="date">
+  				<p>${date}</p>
+  			</div>
+  			<hr/>
+  			<div id="content">
+          ${content}
+        </div>
+  			<hr/>
+  			<div id="insert-comment">
+  				<form>
+  					<input id="comment-here" type="text" name="comment" placeholder="Comment..."><br>
+  					<button id="submit" type="submit">Submit</button>
+  				</form>
+  			</div>
+  			<div id="comments">
+				<p>comments</p>
+			</div>
+			<br/>
+			<p class="continue">
+					<a href="javascript:void(0)" onclick="less(${data.article_id})" article_id="${data.article_id}">Show Less...</a>
+				</p>
+  		</div>`;
+    return article;
+};
+
+
+/*-----serving articles List-----*/
+
+app.get('/article_list',function(req,res){
+	pool.query('SELECT article_id, heading, substring(content,0,500) AS content FROM article ORDER BY article_id',function(err,result){
+		if(err){
+      res.status(500).send(err.toString());
+    }
+    else{
+			var article_list=[];
+			for(var i=0;i<result.rows.length;i++){
+				article_list.push(articleListTemplate(result.rows[i]));
+      //var article_list=result.rows[0]; //all rows to be called later
+      //res.send(articleListTemplate(article_list));
+    }
+		res.send(article_list.toString());
+	}
+	});
+});
+
+function articleListTemplate(data){
+	var article_id=data.article_id;
+	var heading=data.heading;
+  var content=data.content;
+	var article_li=`<div class="container1" article_id=${article_id}>
+          <div class="article1">
+            <div class="imageholder">
+              <img src ="ui/img.gif" alt>
+            </div>
+            <div class="heading">
+              <h2>${heading}</h2>
+						<p>${content}.....</p>
+						</div>
+            <p class="continue">
+              <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
+            </p>
+          </div>
+          <br>
+        </div>`;
+				return article_li;
+};
+
+
+
+app.get('/profile',function(req,res){
+  var profile=`<div class="container3">
+    <div class="imageholder2">
+      <img src="ui/jax.jpg" >
+    </div>
+    <div class="personalinfo">
+      <h1>Name:Jagdish Verma</h1>
+      <p>
+      Age:222
+      etc etc
+    </p>
+    </div>
+    <div class="social">
+      FInd me on:
+      Facebook
+      Twitter
+      Google+
+      LinkedIn
+      GitHub
+    </div>
+  </div>
+`;
+  res.send(profile);
+});
+app.get('/about',function(req,res){
+  var about=`<p>
+          about
+        </p>`;
+  res.send(about);
+});
+
+
+/*-----url mappings-----*/
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+app.get('/article/:article_id',function(req,res){
+	pool.query('SELECT * FROM article where article_id=$1',[req.params.article_id],function(err,result){
+		if(err){
+			res.status(500).send(err.toString());
+		}
+		else{
+			var article=result.rows[0];
+			res.send(articleTemplate(article));
+		}
+	});
+
+})
+
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
-app.get('/main.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+
+app.get('/ui/style_profile.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
 });
 
+app.get('/u/m/q/r/a/panda.html', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'panda.html'));
+});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
@@ -45,50 +199,25 @@ app.get('/ui/style_login.css', function (req, res) {
 app.get('/ui/style_profile.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
 });
-app.get('/img.gif', function (req, res) {
+app.get('/ui/img.gif', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'img.gif'));
 });
 
-app.get('/about',function(req,res){
-  var about=`<p>
-          about
-        </p>`;
-  res.send(about);
+app.get('/ui/paper.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'paper.png'));
 });
 
-app.get('/articles',function(req,res){
-  var articles=`<div class="container">
-        <div class="article">
-          <div class="imageholder">
-            <img src ="ui/img.gif" alt>
-          </div>
-          <div class="heading">
-            <h2>Lorem Ipsum</h2>
-					<br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vivamus varius egestas lectus et mollis. Donec tempor dapibus mauris, nec commodo felis volutpat et.
-              Vestibulum a neque imperdiet, sodales quam ut, eleifend lorem. Cras dictum finibus condimentum.
-              Etiam egestas lobortis erat in pharetra. Cras eget ornare lorem, et sollicitudin tortor.
-              Vivamus gravida nunc vel erat maximus, ut sodales lacus pretium. Suspendisse potenti.
-            </p>
-            <p>
-              In sit amet nunc turpis. Vivamus elementum, dui ac eleifend ultricies, erat diam dignissim magna,
-              in feugiat nulla diam ut ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean tristique porttitor dolor, sed blandit metus blandit non. Donec eu tellus lacus.
-            </p>
-          </div>
-          <p class="continue">
-            <a href="$$$$$$$">Continue Reading...</a>
-          </p>
-        </div>
-        <br>
-        <div id="caption">
-          //Image Caption
-        </div>
-      </div>`;
-  res.send(articles);
+app.get('/ui/jax.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'jax.jpg'));
 });
 
-var port = 8080; // Use 8080 for local development because you might already have apache running on 80
+app.get('/ui/menu.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'menu.png'));
+});
+
+
+/*-----listening on port-----*/
+var port = 8080; // Using 8080 for local development because apache might already be running on 80
 app.listen(8080, function () {
-  console.log(`IMAD course app listening on port ${port}!`);
+  console.log(`Server up and running on port ${port}!`);
 });
