@@ -1,21 +1,22 @@
 
-.container{
+.container1{
+  height:250px;
   border-radius: 5px;
   color:black;
   box-sizing: border-box;
   margin: 5px auto;
-  margin-bottom: 15px;
+//  margin-bottom: 15px;
   padding:20px;
   width:90%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(120, 151, 156, 0.3);
+  transition: 0.3s;
 
 }
-.container:hover{
-background:rgba(0, 0, 0, 0.5);
+.container1:hover{
+background:rgba(120, 151, 156, 0.5);
 }
 
-.article{
-  height:inherit;
+.article1{
   display:block;
   width:100%;
   float:left;
