@@ -10,11 +10,11 @@ app.use(morgan('combined'));
 
 /*-----database connection-----*/
 var config={
-	user:'postgres',
+	user:'jaxstronomer',
 	database:'jaxstronomer',
-	host:'localhost',
+	host:'http://db.imad.hasura-app.io/',
 	port:'5432',
-	password: 'toor'
+	password: process.env.DB_PASSWORD
 };
 var pool = new Pool(config);
 
@@ -71,15 +71,13 @@ function articleTemplate(data){
 app.get('/article_list',function(req,res){
 	pool.query('SELECT article_id, heading, substring(content,0,500) AS content FROM article ORDER BY article_id',function(err,result){
 		if(err){
-      res.status(500).send(err.toString());
-    }
-    else{
+      			res.status(500).send(err.toString());
+    		}
+   		else{
 			var article_list=[];
 			for(var i=0;i<result.rows.length;i++){
 				article_list.push(articleListTemplate(result.rows[i]));
-      //var article_list=result.rows[0]; //all rows to be called later
-      //res.send(articleListTemplate(article_list));
-    }
+		}
 		res.send(article_list.toString());
 	}
 	});
