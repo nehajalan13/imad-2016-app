@@ -36,7 +36,32 @@ function articleTemplate(data){
   var heading=data.heading;
   var date=data.date;
   var content=data.content;
-  var article=`<div class="article2">
+  var article=`<style>
+            .container3{
+              padding-top:20px;
+              position:relative;
+              margin:auto;
+              width:90%;
+              background-color: rgba(0, 0, 0,0.5);
+              box-sizing: border-box;
+            }
+            .imageholder2{
+              position:relative;
+              margin: 20px auto;
+              width:250px;
+              height:250px;
+              border:1px solid black;
+            
+            }
+            .personalinfo{
+              position:relative;
+              margin:30px 0 30px 30px;
+              color:black;
+              font-family: sans-serif;
+            }
+            </style>
+
+            <div class="article2">
   			<div id="heading">
         	<h1>${heading}<h1>
   			</div>
@@ -173,12 +198,6 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-app.get('/ui/common.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'common.css'));
-});
-app.get('/home.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'home.css'));
-});
 app.get('/ui/style_about.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_about.css'));
 });
