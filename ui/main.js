@@ -25,7 +25,7 @@ function article(article_id){
 function less(aid){
   $("a[article_id="+aid+"]").parent().parent().hide(),
   $("div[article_id="+aid+"]").show()
-};
+}
 
 
 
