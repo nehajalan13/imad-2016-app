@@ -60,7 +60,6 @@ body{
   font-size: 3.5em;
   color: #fff;
   text-align: left;
-//  text-shadow: 2px 2px 4px #000000
 }
 
 
@@ -134,7 +133,7 @@ ul.topnav li.icon {
   ul.topnav.responsive li {
     float: none;
     display: block;
-    right:0px;
+    right:0;
     transition: 0.3s;
     text-align:right;
   }
@@ -152,39 +151,7 @@ ul.topnav li.icon {
     }
 }
 
-/*#about,#login{
-	float:right;
-}*/
 
-/*#searchbox {
-    width: 50px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-#searchbox:focus {
-    width: 100%;
-}
-
-#searchbox{
-  color:#fff;
-  display:block;
-  line-height:40px;
-  padding:0;
-  border:none;
-  outline:none;
-  background: transparent;
-  border-bottom: 1px solid #fff;
-}*/
 
 /*----------Row3----------*/
 
@@ -203,3 +170,84 @@ ul.topnav li.icon {
   width:100%;
   box-sizing: border-box;
 }
+
+
+.article2{
+  position:relative;
+  width:90%;
+  margin:auto;
+  margin-bottom:30px;
+  padding:30px;
+  background-color:rgba(120, 151, 156, 0.5);
+  box-sizing: border-box;
+  border-radius: 5px;
+  color:black;
+}
+
+
+.container1{
+  height:250px;
+  border-radius: 5px;
+  color:black;
+  box-sizing: border-box;
+  margin: 5px auto;
+  padding:20px;
+  width:90%;
+  background: rgba(120, 151, 156, 0.3);
+  transition: 0.3s;
+
+}
+.container1:hover{
+background:rgba(120, 151, 156, 0.5);
+}
+
+.article1{
+  display:block;
+  width:100%;
+  float:left;
+}
+.imageholder{
+  display: block;
+  float: left;
+  max-width: 150px;
+  height: 150px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #666666;
+}
+
+.heading{
+  overflow:hidden;
+  margin-left:180px;
+  width:auto;
+  height:180px;
+}
+.continue{
+  display:block;
+  text-align:right;
+}
+
+.container3{
+  padding-top:20px;
+  position:relative;
+  margin:auto;
+  width:90%;
+  background-color: rgba(120, 151, 156, 0.5);
+  box-sizing: border-box;
+}
+.imageholder2{
+  position:relative;
+  margin: 20px auto;
+  width:250px;
+  height:250px;
+  border:1px solid black;
+
+}
+.personalinfo{
+  position:relative;
+  margin:30px 0 30px 30px;
+  color:black;
+  font-family: sans-serif;
+}
+
+
