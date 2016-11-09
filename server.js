@@ -207,7 +207,7 @@ app.get('/ui/menu.png', function (req, res) {
 
 
 /*-----listening on port-----*/
-var port = 8090; // Using 8080 for local development because apache might already be running on 80
-app.listen(8090, function () {
+var port = 8080; // Using 8080 for local development because apache might already be running on 80
+app.listen(8080, function () {
   console.log(`Server up and running on port ${port}!`);
 });
