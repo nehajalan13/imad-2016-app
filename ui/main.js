@@ -55,7 +55,7 @@ function profile(){
   req3.send();
 }
 
-/*-----responsive topnav-----*/
+/*-----responsive topnav----*/
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
