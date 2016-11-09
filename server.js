@@ -12,9 +12,9 @@ app.use(morgan('combined'));
 var config={
 	user:'jaxstronomer',
 	database:'jaxstronomer',
-	host:'http://db.imad.hasura-app.io/',
+	host:'db.imad.hasura-app.io',
 	port:'5432',
-	password: process.env.DB_PASSWORD
+	password: 'db-jaxstronomer-90290'
 };
 var pool = new Pool(config);
 
