@@ -94,8 +94,8 @@ function articleListTemplate(data){
             </div>
             <div class="heading">
               <h2>${heading}</h2>
-						<p>${content}.....</p>
-						</div>
+				<p>${content}.....</p>
+			</div>
             <p class="continue">
               <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
             </p>
@@ -106,7 +106,7 @@ function articleListTemplate(data){
 }
 
 
-
+/*-----serving profile------*/
 app.get('/profile',function(req,res){
   var profile=`<div class="container3">
     <div class="imageholder2">
@@ -131,6 +131,8 @@ app.get('/profile',function(req,res){
 `;
   res.send(profile);
 });
+
+/*-----serving about------*/
 app.get('/about',function(req,res){
   var about=`<p>
           about
