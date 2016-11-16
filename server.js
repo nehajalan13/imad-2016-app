@@ -41,7 +41,7 @@ function articleTemplate(data){
         	<h1>${heading}<h1>
   			</div>
   			<div id="date">
-  				<p>${date}</p>
+  				<p>${date.toDateString()}</p>
   			</div>
   			<hr/>
   			<div id="content">
@@ -90,12 +90,12 @@ function articleListTemplate(data){
 	var article_li=`<div class="container1" article_id=${article_id}>
           <div class="article1">
             <div class="imageholder">
-              <img src ="ui/img.gif" alt>
+              <img id="img1" src ="ui/img.gif" alt>
             </div>
             <div class="heading">
-              <h2>${heading}</h2>
-				<p>${content}.....</p>
-			</div>
+              <h1>${heading}</h1>
+							<p>${content}.....</p>
+						</div>
             <p class="continue">
               <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
             </p>
@@ -108,7 +108,7 @@ function articleListTemplate(data){
 
 /*-----serving profile------*/
 app.get('/profile',function(req,res){
-  var profile=`<div class="container3">
+  var profile=`<div class="container7">
     <div class="imageholder2">
       <img src="ui/jax.jpg" >
     </div>
@@ -131,6 +131,7 @@ app.get('/profile',function(req,res){
 `;
   res.send(profile);
 });
+
 
 /*-----serving about------*/
 app.get('/about',function(req,res){
@@ -156,20 +157,29 @@ app.get('/article/:article_id',function(req,res){
 			res.send(articleTemplate(article));
 		}
 	});
-
 });
 
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
+app.get('/ui/login.html', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'login.html'));
+});
+
+
+app.get('/u/m/q/r/a/panda.html', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'panda.html'));
+});
+
+app.get('/ui/login.html', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'login.html'));
+});
+
 
 app.get('/ui/style_profile.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
 });
 
-app.get('/u/m/q/r/a/panda.html', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'panda.html'));
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
@@ -195,16 +205,20 @@ app.get('/ui/img.gif', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'img.gif'));
 });
 
-app.get('/ui/paper.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'paper.png'));
+app.get('/ui/menu.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'menu.png'));
 });
 
 app.get('/ui/jax.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'jax.jpg'));
 });
 
-app.get('/ui/menu.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'menu.png'));
+app.get('/ui/loading.gif', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'loading.gif'));
+});
+
+app.get('/ui/bg.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'bg.jpg'));
 });
 
 
