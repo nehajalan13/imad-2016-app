@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Signika" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Signika|Gruppo|Cantarell|Didact+Gothic" rel="stylesheet">
 		<link rel="stylesheet" href="/ui/style.css" media="screen">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<title>Blog | Jagdish Verma</title>
 	</head>
 	<body id="top">
+		<div class="loading">
+			<div class="loading_gif">
+				<img src="/ui/loading.gif">
+			</div>
+		</div>
     <div class="row1">
       <div id="banner">
-        <div id="blog_name">
+        <div id="blog_name"><a href="/">
           <header>J.Blogs</header>
+        </a>
         </div>
 		<div id="navmenu">
 			<ul class="topnav" id="myTopnav">
-				<li class="icon"><img src="ui/menu.png" onclick="myFunction()"></li>
-				<li><a href="#">Home</a></li>
+				<li class="icon"><img src="ui/menu.png" id="menu.png" ></li>
+				<li><a href="/">Home</a></li>
 				<li><a href="javascript:void(0)" onclick="article_list()">Articles</a></li>
 				<li><a href="javascript:void(0)" onclick="profile()">Profile</a></li>
-				<li id="login"><a href="#">Login</a></li>
+				<li id="login"><a href="/ui/login.html">Login</a></li>
 				<li id="about"><a href="javascript:void(0)" onclick="about()">About</a></li>
 			</ul>
 	      </div>
@@ -28,6 +34,19 @@
     </div>
 
 		<div id="row3">
+			<div class="homepage">
+				<div class="container4">
+          <div id="intro">
+            Welcome to J.Blogs
+          </div>
+          <div id="profile_btn" onclick="profile()">
+            My Profile
+          </div>
+          <div id="articles_btn" onclick="article_list()">
+            My Articles
+          </div>
+				</div>
+			</div>
 		</div>
 
     <div class="row4">
@@ -35,6 +54,9 @@
         <footer>Copyright : Jagdish Verma (2016)          (Please refresh if the page doesn't load properly)</footer>
       </div>
     </div>
+
+
+
 
 	<script type="text/javascript" src="/ui/main.js"></script>
   </body>
