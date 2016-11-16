@@ -1,52 +1,62 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="common.css" media="screen">
-		<link rel="stylesheet" href="style_login.css" media="screen">
-		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Signika|Gruppo|Cantarell|Didact+Gothic" rel="stylesheet">
+		<link rel="stylesheet" href="/ui/style.css" media="screen">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<title>Blog | Jagdish Verma</title>
 	</head>
 	<body id="top">
+		<div class="loading">
+			<div class="loading_gif">
+				<img src="/ui/loading.gif">
+			</div>
+		</div>
     <div class="row1">
       <div id="banner">
-        <div id="blog_name">
-          <header>BlogLite</header>
+        <div id="blog_name"><a href="/">
+          <header>J.Blogs</header>
+        </a>
         </div>
+		<div id="navmenu">
+			<ul class="topnav" id="myTopnav">
+				<li class="icon"><img src="ui/menu.png" onclick="myFunction()"></li>
+				<li><a href="/">Home</a></li>
+				<li><a href="javascript:void(0)" onclick="article_list()">Articles</a></li>
+				<li><a href="javascript:void(0)" onclick="profile()">Profile</a></li>
+				<li id="login"><a href="#">Login</a></li>
+				<li id="about"><a href="javascript:void(0)" onclick="about()">About</a></li>
+			</ul>
+	      </div>
       </div>
     </div>
-    <div class="row2">
-      <div id="navmenu">
-        <ul >
-          <li><a href="#">Home</a></li>
-					<li><a href="#">My Profile</a></li>
-					<li><a href="#">My Articles</a></li>
-					<li><a href="#">Add Articles</a></li>
-					<li id="logout"><a href="#">Logout</a></li>
-					<li id="about"><a href="#">About</a></li>
-        </ul>
-      </div>
-		</div>
 
-		<div class=row3>
-      <div class="container2">
-        <form>
-          <div class="box">
-            <input id="usrn" type="text" name="username" placeholder="  Username" required><br>
-            <input id="pass" type="password" name="password" placeholder="  Password" required><br>
-            <button id="login" type="submit">Login</button>
-                  <div class="register">
-                          Not registered yet ?<br/><span id="register">Register here</span>
-                  </div>
-              </div>
-          </form>
-      </div>
+		<div id="row3">
+			<div class="modal">
+				<div class="modal_container">
+					<ul class="switcher">
+						<li><a href:"javascript:void(0)">Login</a></li>
+						<li><a href:"javascript:void(0)">Signup</a></li>
+					</ul>
+					<div id="login">
+						<form>
+							
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 
     <div class="row4">
       <div id="footer">
-        <footer>Copyright : Jagdish Verma - 2016</footer>
+        <footer>Copyright : Jagdish Verma (2016)          (Please refresh if the page doesn't load properly)</footer>
       </div>
     </div>
+
+
+
+
+	<script type="text/javascript" src="/ui/main.js"></script>
   </body>
 </html>
