@@ -1,9 +1,11 @@
 function article_list(){
   var element=document.getElementById('row3');
+  $('.loading').show();
   var req3=new XMLHttpRequest();
   req3.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
       element.innerHTML=this.responseText;
+        $('.loading').hide();
     }
   };
   req3.open('GET','/article_list',true);
@@ -12,10 +14,13 @@ function article_list(){
 
 function article(article_id){
   $("div[article_id="+article_id+"]").hide();
+    $('.loading').show();
   var req2=new XMLHttpRequest();
   req2.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
       $(this.responseText).insertBefore("div[article_id="+(article_id)+"]");
+      $("div[article_id="+article_id+"]").hide();
+      $('.loading').hide();
     }
   };
   req2.open('GET','/article/'+article_id,true);
@@ -31,10 +36,12 @@ function less(aid){
 
 function about(){
   var element=document.getElementById('row3');
+    $('.loading').show();
   var req1=new XMLHttpRequest();
-  req1.onreadystatechange=function(){
+    req1.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
       element.innerHTML=this.responseText;
+          $('.loading').hide();
     }
   };
   req1.open('GET','/about',true);
@@ -45,10 +52,12 @@ function about(){
 
 function profile(){
   var element=document.getElementById('row3');
+      $('.loading').show();
   var req3=new XMLHttpRequest();
   req3.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
       element.innerHTML=this.responseText;
+          $('.loading').hide();
     }
   };
   req3.open('GET','/profile',true);
@@ -56,7 +65,7 @@ function profile(){
 }
 
 /*-----responsive topnav----*/
-function myFunction() {
+function myFunction(){
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
         x.className += " responsive";
@@ -67,3 +76,15 @@ function myFunction() {
 $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
+
+/*window.onclick=function(event){
+  var x=document.getElementById('menu.png')
+  if (event.target==x){
+    $("ul#myTopnav li :not(:first)").show();
+    myFunction();}
+else{
+
+  console.log(event.target);
+$("ul#myTopnav li :not(:first)").hide();
+}
+};*/
