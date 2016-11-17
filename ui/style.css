@@ -387,6 +387,7 @@ background:rgba(255,255,255, 0.7);
 
 
 #articles_btn,#profile_btn {
+    float:left;
   animation-name: introbox;
   animation-duration: 1s;
   animation-timing-function: ease-in;
