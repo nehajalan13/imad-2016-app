@@ -78,11 +78,10 @@ $('ul.topnav li').click(function(){
 });
 
 
-window.onclick=function(event){
+/*window.onclick=function(event){
   var x=document.getElementById('menu.png');
   if(window.innerWidth<=700){
   if (event.target!=x){
-      myFunction();
     $("ul#myTopnav.responsive li :not(:first)").hide();
     }
 else{
@@ -93,4 +92,4 @@ else{
   console.log(event.target);
 //$("ul#myTopnav li :not(:first)").hide();
 }}
-};
+};*/
