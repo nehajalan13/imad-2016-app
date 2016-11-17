@@ -407,6 +407,6 @@ background:rgba(255,255,255, 0.7);
   cursor: pointer;
 }
 #articles_btn:hover, #articles_btn:focus, #articles_btn:active,#profile_btn:hover, #profile_btn:focus, #profile_btn:active {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
 }
