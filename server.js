@@ -92,8 +92,9 @@ function articleListTemplate(data){
 
             <div class="heading">
               <h1>${heading}</h1>
-							<p>${content}.....</p>
-						</div>
+              <hr>
+			  <p>${content}.....</p>
+			</div>
             <p class="continue">
               <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
             </p>
