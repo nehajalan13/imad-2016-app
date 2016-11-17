@@ -65,31 +65,29 @@ function profile(){
 }
 
 /*-----responsive topnav----*/
-function myFunction(){
+/*function myFunction(){
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
         x.className += " responsive";
     } else {
         x.className = "topnav";
     }
-}
+}*/
 $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
-
-
-/*window.onclick=function(event){
-  var x=document.getElementById('menu.png');
-  if(window.innerWidth<=700){
-  if (event.target!=x){
-    $("ul#myTopnav.responsive li :not(:first)").hide();
+window.onclick=myFunction(e){
+    var x = document.getElementById("myTopnav");
+    if(e.target==document.getElementById('menu.png')){
+    
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
     }
-else{
-    if(event.target==x){
-        myFunction();
-    $("#myTopnav.responsive>li").show();
     }
-  console.log(event.target);
-//$("ul#myTopnav li :not(:first)").hide();
-}}
-};*/
+    else{
+        x.className="topnav";
+    }
+}
+
