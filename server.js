@@ -69,7 +69,7 @@ function articleTemplate(data){
 /*-----serving articles List-----*/
 
 app.get('/article_list',function(req,res){
-	pool.query('SELECT article_id, heading, substring(content,0,500) AS content FROM article ORDER BY article_id',function(err,result){
+	pool.query('SELECT article_id, heading, substring(content,0,600) AS content FROM article ORDER BY article_id',function(err,result){
 		if(err){
       			res.status(500).send(err.toString());
     		}
