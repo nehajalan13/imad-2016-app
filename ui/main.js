@@ -82,6 +82,7 @@ window.onclick=function(event){
   var x=document.getElementById('menu.png');
   if(window.innerWidth<=700){
   if (event.target!=x){
+      myFunction();
     $("ul#myTopnav.responsive li :not(:first)").hide();
     }
 else{
