@@ -76,7 +76,7 @@ function profile(){
 $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
-window.onclick=myFunction(e){
+window.onclick=function(e){
     var x = document.getElementById("myTopnav");
     if(e.target==document.getElementById('menu.png')){
     
