@@ -162,47 +162,13 @@ app.get('/article/:article_id',function(req,res){
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
-app.get('/ui/login.html', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'login.html'));
-});
-
 
 app.get('/u/m/q/r/a/panda.html', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'panda.html'));
 });
 
-app.get('/ui/login.html', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'login.html'));
-});
-
-
-app.get('/ui/style_profile.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
-});
-
-
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
-});
-
-app.get('/ui/style_about.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_about.css'));
-});
-
-app.get('/ui/style_article.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_article.css'));
-});
-app.get('/ui/style_article_list.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_article_list.css'));
-});
-app.get('/ui/style_login.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_login.css'));
-});
-app.get('/ui/style_profile.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style_profile.css'));
-});
-app.get('/ui/img.gif', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'img.gif'));
 });
 
 app.get('/ui/menu.png', function (req, res) {
