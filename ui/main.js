@@ -85,7 +85,9 @@ window.onclick=function(event){
     $("ul#myTopnav.responsive li :not(:first)").hide();
     }
 else{
-
+    if (event.target==x){
+    $("ul#myTopnav.responsive li :not(:first)").show();
+    }
   console.log(event.target);
 //$("ul#myTopnav li :not(:first)").hide();
 }}
