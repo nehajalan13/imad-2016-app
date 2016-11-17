@@ -89,9 +89,7 @@ function articleListTemplate(data){
   var content=data.content;
 	var article_li=`<div class="container1" article_id=${article_id}>
           <div class="article1">
-            <div class="imageholder">
-              <img id="img1" src ="ui/img.gif" alt>
-            </div>
+
             <div class="heading">
               <h1>${heading}</h1>
 							<p>${content}.....</p>
@@ -102,7 +100,7 @@ function articleListTemplate(data){
           </div>
           <br>
         </div>`;
-				return article_li;
+		return article_li;
 }
 
 
