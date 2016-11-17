@@ -77,7 +77,7 @@ $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
 
-/*window.onclick=function(event){
+window.onclick=function(event){
   var x=document.getElementById('menu.png')
   if (event.target==x){
     $("ul#myTopnav li :not(:first)").show();
@@ -87,4 +87,4 @@ else{
   console.log(event.target);
 $("ul#myTopnav li :not(:first)").hide();
 }
-};*/
+};
