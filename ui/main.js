@@ -78,7 +78,7 @@ $('ul.topnav li').click(function(){
 });
 
 window.onclick=function(event){
-  var x=document.getElementById('menu.png')
+  var x=document.getElementById('menu.png');
   if (event.target==x){
     $("ul#myTopnav.responsive li :not(:first)").show();
     myFunction();}
