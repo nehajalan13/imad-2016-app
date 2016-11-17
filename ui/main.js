@@ -79,12 +79,12 @@ $('ul.topnav li').click(function(){
 
 window.onclick=function(event){
   var x=document.getElementById('menu.png');
-  if (event.target==x){
-    $("ul#myTopnav.responsive li :not(:first)").show();
+  if (event.target!=x){
+    $("ul#myTopnav.responsive li :not(:first)").hide();
     myFunction();}
-else{
+/*else{
 
   console.log(event.target);
 $("ul#myTopnav li :not(:first)").hide();
-}
+}*/
 };
