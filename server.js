@@ -89,7 +89,6 @@ function articleListTemplate(data){
   var content=data.content;
 	var article_li=`<div class="container1" article_id=${article_id}>
           <div class="article1">
-
             <div class="heading">
               <h1>${heading}</h1>
               <hr>
@@ -99,7 +98,6 @@ function articleListTemplate(data){
               <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
             </p>
           </div>
-          <br>
         </div>`;
 		return article_li;
 }
