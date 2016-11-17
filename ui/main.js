@@ -86,7 +86,7 @@ window.onclick=function(event){
     }
 else{
     if(event.target==x){
-    $("#myTopnav>li").show();
+    $("#myTopnav.responsive>li").show();
     }
   console.log(event.target);
 //$("ul#myTopnav li :not(:first)").hide();
