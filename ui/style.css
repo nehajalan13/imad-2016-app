@@ -238,7 +238,7 @@ background:rgba(255,255,255, 0.7);
   width:100%;
   float:left;
 }
-.imageholder{
+/*.imageholder{
   display: block;
   float: left;
   max-width: 150px;
@@ -246,7 +246,7 @@ background:rgba(255,255,255, 0.7);
   margin: 0;
   padding: 4px;
   border: 1px solid #666666;
-}
+}*/
 
 .heading{
   overflow:hidden;
