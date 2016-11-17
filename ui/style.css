@@ -250,7 +250,7 @@ background:rgba(255,255,255, 0.7);
 
 .heading{
   overflow:hidden;
-  margin-left:180px;
+/*  margin-left:180px;*/
   width:auto;
   height:180px;
 }
