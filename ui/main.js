@@ -64,15 +64,6 @@ function profile(){
   req3.send();
 }
 
-/*-----responsive topnav----*/
-/*function myFunction(){
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}*/
 $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
