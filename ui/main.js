@@ -86,6 +86,7 @@ window.onclick=function(event){
     }
 else{
     if(event.target==x){
+        myFunction();
     $("#myTopnav.responsive>li").show();
     }
   console.log(event.target);
