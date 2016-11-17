@@ -91,7 +91,6 @@ function articleListTemplate(data){
           <div class="article1">
             <div class="heading">
               <h1>${heading}</h1>
-              <hr>
 			  <p>${content}.....</p>
 			</div>
             <p class="continue">
