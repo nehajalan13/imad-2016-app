@@ -63,7 +63,7 @@ function profile(){
   req3.open('GET','/profile',true);
   req3.send();
 }
-
+/*----responsive topnav-----*/
 $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
