@@ -79,7 +79,7 @@ $('ul.topnav li').click(function(){
 
 
 window.onclick=function(event){
-  var x=document.getElementById('ul#myTopnav.responsive li');
+  var x=document.getElementById('ul#myTopnav.responsive li *');
   if(window.innerWidth<=700){
   if (event.target!=x){
     $("ul#myTopnav.responsive li :not(:first)").hide();
