@@ -258,6 +258,7 @@ background:rgba(255,255,255, 0.7);
   font-family:  'Cantarell', sans-serif;
   font-weight:bold;
   font-size: 28px;
+  margin-top:0;
 }
 .heading>p{
   font-family:Didact Gothic, sans-serif;
