@@ -77,14 +77,16 @@ $('ul.topnav li').click(function(){
   $('li.icon').css('text-align','right');
 });
 
-/*window.onclick=function(event){
-  var x=document.getElementById('menu.png');
+
+window.onclick=function(event){
+  var x=document.getElementById('ul#myTopnav.responsive li');
+  if(window.innerWidth<=700){
   if (event.target!=x){
     $("ul#myTopnav.responsive li :not(:first)").hide();
-    myFunction();}
-/*else{
+    }
+else{
 
   console.log(event.target);
-$("ul#myTopnav li :not(:first)").hide();
-}*/
+//$("ul#myTopnav li :not(:first)").hide();
+}}
 };
