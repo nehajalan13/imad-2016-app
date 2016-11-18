@@ -225,7 +225,7 @@ ul.topnav li.icon {
   padding:10px;
   width:90%;
   background: rgba(255,255,255, 0.5);
-  animation-name: introbox;
+  animation-name: fade_in;
   animation-duration: 0.5s;
 
 }
@@ -415,5 +415,4 @@ background:rgba(255,255,255, 0.7);
 
 #logout{
     display:none;
-}
 }
