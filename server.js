@@ -3,10 +3,19 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
-
 var app = express();
-app.use(morgan('combined'));
+var crypto = require('crypto');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
+
+app.use(morgan('combined'));
+app.use(bodyParser.json());
+
+app.use(session({
+    secret: 'someRandomSecretValue',
+    cookie: { maxAge: 1000 * 60 * 60 * 24}
+}))
 
 /*-----database connection-----*/
 var config={
@@ -14,7 +23,7 @@ var config={
 	database:'jaxstronomer',
 	host:'db.imad.hasura-app.io',
 	port:'5432',
-	password: 'db-jaxstronomer-90290'
+	password: process.env.DB_PASSWORD
 };
 var pool = new Pool(config);
 
@@ -41,7 +50,8 @@ function articleTemplate(data){
         	<h1>${heading}<h1>
   			</div>
   			<div id="date">
-  				<p>${date.toDateString()}</p>
+  				<p><i class="fa fa-clock-o" aria-hidden="true"></i>
+${date.toDateString()}</p>
   			</div>
   			<hr/>
   			<div id="content">
@@ -49,17 +59,17 @@ function articleTemplate(data){
         </div>
   			<hr/>
   			<div id="insert-comment">
-  				<form>
   					<input id="comment-here" type="text" name="comment" placeholder="Comment..."><br>
   					<button id="submit" type="submit">Submit</button>
-  				</form>
   			</div>
   			<div id="comments">
-				<p>comments</p>
+				<p>comments</p
+				<hr>
 			</div>
 			<br/>
 			<p class="continue">
-					<a href="javascript:void(0)" onclick="less(${data.article_id})" article_id="${data.article_id}">Show Less...</a>
+					<a href="javascript:void(0)" onclick="less(${data.article_id})" article_id="${data.article_id}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
+Show Less...</a>
 				</p>
   		</div>`;
     return article;
@@ -94,7 +104,8 @@ function articleListTemplate(data){
 			  <p>${content}.....</p>
 			</div>
             <p class="continue">
-              <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...</a>
+              <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+</a>
             </p>
           </div>
         </div>`;
@@ -102,26 +113,57 @@ function articleListTemplate(data){
 }
 
 
+
 /*-----serving profile------*/
 app.get('/profile',function(req,res){
   var profile=`<div class="container7">
-    <div class="imageholder2">
-      <img src="ui/jax.jpg" >
-    </div>
-    <div class="personalinfo">
-      <h1>Name:Jagdish Verma</h1>
-      <p>
-      Age:222
-      etc etc
-    </p>
-    </div>
-    <div class="social">
-      FInd me on:
-      Facebook
-      Twitter
-      Google+
-      LinkedIn
-      GitHub
+    <div id="p_row1">
+      <div id="imageholder2">
+        <img src = '/ui/jax.jpg'>
+      </div>
+      <div id="bio">
+      <h1>Bio<h1><hr>
+      <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>    Jagdish Kumar Verma</h2>
+      <h3><i class="fa fa-graduation-cap" aria-hidden="true"></i>    Haldia Institute of Technology<h3>
+      <h3><i class="fa fa-code" aria-hidden="true"></i>    Coder, UI/UX Designer</h3>
+      </div>
+      <div id="skillset">
+        <h1>Skillset</h1>
+        <hr>
+        <br><h2>Languages :</h2>
+        <h3><i class="icon-c"></i>      C (Intermediate)</h3>
+        <h3><i class="icon-cplusplus"></i>      C++ (Intermediate)</h3>
+        <h3><i class="icon-java-bold"></i>      Java (Intermediate)</h3>
+        <h3><i class="fa fa-html5" aria-hidden="true"></i>      HTML5 (Intermediate)</h3>
+        <h3><i class="fa fa-css3" aria-hidden="true"></i>     CSS3 (Intermediate)</h3>
+        <h3><i class="icon-javascript-alt"></i>      Javascript (Intermediate)</h3>
+        <h3><i class="icon-nodejs"></i>       Nodejs(Beginner)</h3>
+        <br><h2>Operating Systems:</h2>
+        <h3><i class="icon-centos"></i>       CentOS (Beginner)</h3>
+        <h3><i class="fa fa-windows" aria-hidden="true"></i>        Windows(Advanced)</h3>
+        <br><h2>Databases:</h2>
+        <h3><i class="icon-postgres"></i>        PostgreSQL(Beginner)</h3>
+        <br><h2>Others:</h2>
+        <h3><i class="icon-splatter"></i>       Blender (Beginner)</h3>
+        <h3>        Visual Basic</h3>
+      </div>
+      <div id="contacts">
+        <h1>Contacts</h1>
+        <hr>
+        <h3><i class="fa fa-envelope" aria-hidden="true"></i>    jags.k.verma@gmail.com</h3>
+        <h3><i class="fa fa-phone" aria-hidden="true"></i>  <i class="fa fa-whatsapp" aria-hidden="true"></i>    7501673237</h3>
+        <h3><i class="fa fa-github-square" aria-hidden="true"></i>    github.com/jaxstronomer</h3>
+        <h3><i class="fa fa-linkedin-square" aria-hidden="true"></i>    LinkedIn</h3>
+      </div>
+      <div id="socials">
+        <h1>Socials</h1>
+        <hr>
+        <h3><i class="fa fa-facebook-official" aria-hidden="true"></i>    Facebook</h3>
+        <h3><i class="fa fa-twitter" aria-hidden="true"></i>    twitter</h3>
+        <h3><i class="fa fa-google-plus" aria-hidden="true"></i>    Google+</h3>
+        <h3><i class="fa fa-quora" aria-hidden="true"></i>    Quora</h3>
+        </div>
+      </div>
     </div>
   </div>
 `;
@@ -131,11 +173,39 @@ app.get('/profile',function(req,res){
 
 /*-----serving about------*/
 app.get('/about',function(req,res){
-  var about=`<p>
-          about
-        </p>`;
+  var about=`<div class="container8">
+    <div id="a_row1">
+      <h1>About Me</h1>
+      <hr>
+      <p>Hi,<br> My name is Jagdish Kumar Verma</p>
+      <p>I am currently completing my B.Tech in Computer Science and Engineering from Haldia Institute of Technology, Haldia. I'm in fifth semester of the course.</p>
+      </div>
+      <div id="a_row2">
+        <h1>About the Website</h1>
+        <hr>
+        <p>This website was developed as a final assignment for the MOOC "Introduction to Modern Application Development" conducted by NPTEL.</p>
+      </div>
+      <div id="a_row3">
+        <h1>Features</h1>
+        <hr>
+        <p>Read from various articles.</p>
+        <p>Articles served dynamically, in real-time</p>
+        <p>AJAX based architecture</p>
+        <p></p>
+      </div>
+      <div id="a_row4">
+        <h1>Technology Stack</h1>
+        <hr>
+        <p>HTML5</p>
+        <p>CSS3</p>
+        <p>jQuery</p>
+        <p>Nodejs</p>
+        <p>PostgreSQL</p>
+      </div>
+  </div>`;
   res.send(about);
 });
+
 
 
 /*-----url mappings-----*/
@@ -184,8 +254,75 @@ app.get('/ui/bg.jpg', function (req, res) {
 });
 
 
+/*hash function*/
+function hash (input, salt) {
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return ["pbkdf2", "10000", salt, hashed.toString('hex')].join('$');
+}
+app.get('/hash/:input', function(req, res) {
+   var hashedString = hash(req.params.input, 'this-is-some-random-string');
+   res.send(hashedString);
+});
+
+
+app.post('/create-user', function (req, res) {
+ var username = req.body.username;
+  var password = req.body.password;
+  var salt = crypto.randomBytes(128).toString('hex');
+   var dbString = hash(password, salt);
+   pool.query('INSERT INTO "user"(username, password) VALUES($1, $2)', [username, dbString], function (err, result) {
+      if (err) {
+          res.status(500).send(err.toString());
+      }else {
+          res.send('User successfully created: ' + username);
+      }  
+       
+   }); 
+   
+});
+
+app.post('/login',function(req, res){
+	var username = req.body.username;
+	var password = req.body.password;
+	pool.query('Select * FROM "user" WHERE username =$1', [username], function (err, result) {
+		 if (err) {
+				 res.status(500).send(err.toString());
+		 } else {
+			 if(result.rows.length ===0){
+				 err.send(403).send("username/password is incorrect");
+			 } else{
+				 var dbString = result.rows[0].password;
+				 var salt = dbString.split('$')[2];
+				 var hashedPassword = hash(password,salt);
+				 if(hashedPassword === dbString){
+					 req.session.auth = {userId: result.rows[0].user_id};
+					 res.send('Logged in Successfully');
+				 }
+				 else
+				 res.status(403).send('username/password is incorrect');
+		 }
+	 }
+	});});
+
+app.get('/check-login',function(req,res){
+	if(req.session && req.session.auth && req.session.auth.userId){
+		res.send(req.session.auth.userId.toString());
+	}
+	else{
+		res.status(403).send('not logged in');
+	}
+});
+
+app.get('/logout', function(req,res){
+	delete req.session.auth;
+	res.send("logged out");
+})
+
+
 /*-----listening on port-----*/
+
 var port = 8080; // Using 8080 for local development because apache might already be running on 80
 app.listen(8080, function () {
   console.log(`Server up and running on port ${port}!`);
 });
+
