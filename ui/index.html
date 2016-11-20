@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Signika|Gruppo|Cantarell|Didact+Gothic|Oxygen" rel="stylesheet">
 		<link rel="stylesheet" href="/ui/style.css" media="screen">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.3.0/font-mfizz.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<title>Blog | Jagdish Verma</title>
 	</head>
@@ -17,18 +19,15 @@
     <div class="row1">
       <div id="banner">
         <div id="blog_name"><a href="/">
-          <header>J.Blogs</header>
-        </a>
-        </div>
+          <header>J.Blogs</div>
 		<div id="navmenu">
 			<ul class="topnav" id="myTopnav">
 				<li class="icon"><img src="ui/menu.png" id="menu.png" ></li>
-				<li><a href="/">Home</a></li>
-				<li><a href="javascript:void(0)" onclick="article_list()">Articles</a></li>
-				<li><a href="javascript:void(0)" onclick="profile()">Profile</a></li>
-				<li id="login"><a href="javascript:void(0)" onclick="login()">Login</a></li>
-				<li id="logout"><a href="javascript:void(0)" onclick="logout()">Logout</a></li>
-				<li id="about"><a href="javascript:void(0)" onclick="about()">About</a></li>
+				<li><a href="/"><i class="fa fa-home" aria-hidden="true">  Home</i></a></li>
+				<li><a href="javascript:void(0)" onclick="article_list()"><i class="fa fa-newspaper-o" aria-hidden="true">  Articles</i></a></li>
+				<li><a href="javascript:void(0)" onclick="profile()"><i class="fa fa-user" aria-hidden="true">  Profile</i></a></li>
+
+				<li id="about"><a href="javascript:void(0)" onclick="about()"><i class="fa fa-info-circle" aria-hidden="true">  About</i></a></li>
 			</ul>
 	      </div>
       </div>
@@ -50,9 +49,41 @@
 			</div>
 		</div>
 
+		<div class="modal_login" id="modal_login">
+			<div class="modal_wrapper">
+				<div id="switcher">
+					<div id="login_btn" onclick="loginbtn()">
+						Login
+					</div>
+					<div id="register_btn" onclick="register_button()">
+						Register
+					</div>
+				</div><div style="width:80%;margin:auto;">
+				<div id="login_form">
+
+	            <input id="usrn" type="text" name="username" placeholder="Username*" required><br>
+	            <input id="pass" type="password" name="password" placeholder="Password*" required><br>
+	            <button id="submit_btn" type="submit">LOGIN</button>
+
+				</div>
+				<div id="register_form">
+
+	            <input id="newusrn" type="text" name="newusername" placeholder="New Username*" required><br>
+	            <input id="newpass" type="password" name="newpassword" placeholder="New Password*" required><br>
+	            <button id="registerbtn" type="submit">REGISTER</button>
+
+				</div>
+				<div id="close_btn" onclick="close_function()">Close</div>
+				</div>
+			</div>
+		</div>
+
+
     <div class="row4">
       <div id="footer">
-        <footer>Developed by : Jagdish Verma (2016) </footer>
+        <footer>Website by : Jagdish Verma (2016)<div style="float:right">
+					 <i class="fa fa-css3" aria-hidden="true"></i>
+<i class="fa fa-html5" aria-hidden="true"></i> </div></footer>
       </div>
     </div>
 
