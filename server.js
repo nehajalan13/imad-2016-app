@@ -21,13 +21,14 @@ saveUninitialized: true
 /*-----database connection-----*/
 
 
+
 //imad database
 var config={
 	user:'jaxstronomer',
 	database:'jaxstronomer',
 	host:'db.imad.hasura-app.io',
 	port:'5432',
-	password: 'db-jaxstronomer-90290'
+	password: 'process.env.DB_PASSWORD'
 };
 
 
