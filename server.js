@@ -14,17 +14,23 @@ app.use(bodyParser.json());
 
 app.use(session({
     secret: 'someRandomSecretValue',
-    cookie: { maxAge: 1000 * 60 * 60 * 24}
+    cookie: { maxAge: 1000 * 60 * 60 * 24},
+    resave: true,
+saveUninitialized: true
 }))
-
 /*-----database connection-----*/
+
+
+//imad database
 var config={
 	user:'jaxstronomer',
 	database:'jaxstronomer',
 	host:'db.imad.hasura-app.io',
 	port:'5432',
-	password: process.env.DB_PASSWORD
+	password: 'db-jaxstronomer-90290'
 };
+
+
 var pool = new Pool(config);
 
 
@@ -56,16 +62,16 @@ ${date.toDateString()}</p>
   			<hr/>
   			<div id="content">
           ${content}
-        </div>
-  			<hr/>
-  			<div id="insert-comment">
-  					<input id="comment-here" type="text" name="comment" placeholder="Comment..."><br>
-  					<button id="submit" type="submit">Submit</button>
+        </div><hr>
+  			<div id="insert_comment">
+            <textarea rows="10" name="comment" id="comment" placeholder="Add Comment"></textarea><br>
+          <button id="submit" type="submit">Submit</button>
   			</div>
-  			<div id="comments">
-				<p>comments</p
-				<hr>
-			</div>
+        <div><h2><i class="fa fa-comments" aria-hidden="true"></i>    Comments</h2>
+  			<div id="comment_area">
+
+				</div>
+
 			<br/>
 			<p class="continue">
 					<a href="javascript:void(0)" onclick="less(${data.article_id})" article_id="${data.article_id}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -113,7 +119,6 @@ function articleListTemplate(data){
 }
 
 
-
 /*-----serving profile------*/
 app.get('/profile',function(req,res){
   var profile=`<div class="container7">
@@ -122,10 +127,12 @@ app.get('/profile',function(req,res){
         <img src = '/ui/jax.jpg'>
       </div>
       <div id="bio">
-      <h1>Bio<h1><hr>
-      <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>    Jagdish Kumar Verma</h2>
+      <h1>Bio</h1>
+      <hr>
+      <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>    Jagdish Kumar Verma</h3>
       <h3><i class="fa fa-graduation-cap" aria-hidden="true"></i>    Haldia Institute of Technology<h3>
-      <h3><i class="fa fa-code" aria-hidden="true"></i>    Coder, UI/UX Designer</h3>
+      <h3><i class="fa fa-code" aria-hidden="true"></i>    Developer,Coder, UI/UX Designer</h3>
+      <h3><i class="fa fa-list" aria-hidden="true"></i><a href="https://drive.google.com/file/d/0B4St1j_16gfcRzljaGh2T0E4Xzg/view?usp=sharing" target="_blank" style="text-decoration:none">    Resume</a></h3>
       </div>
       <div id="skillset">
         <h1>Skillset</h1>
@@ -140,28 +147,28 @@ app.get('/profile',function(req,res){
         <h3><i class="icon-nodejs"></i>       Nodejs(Beginner)</h3>
         <br><h2>Operating Systems:</h2>
         <h3><i class="icon-centos"></i>       CentOS (Beginner)</h3>
-        <h3><i class="fa fa-windows" aria-hidden="true"></i>        Windows(Advanced)</h3>
+        <h3><i class="fa fa-windows" aria-hidden="true"></i>        Windows</h3>
         <br><h2>Databases:</h2>
         <h3><i class="icon-postgres"></i>        PostgreSQL(Beginner)</h3>
         <br><h2>Others:</h2>
         <h3><i class="icon-splatter"></i>       Blender (Beginner)</h3>
-        <h3>        Visual Basic</h3>
+        <h3><i class="fa fa-id-badge" aria-hidden="true"></i>        Visual Basic</h3>
       </div>
       <div id="contacts">
         <h1>Contacts</h1>
         <hr>
         <h3><i class="fa fa-envelope" aria-hidden="true"></i>    jags.k.verma@gmail.com</h3>
         <h3><i class="fa fa-phone" aria-hidden="true"></i>  <i class="fa fa-whatsapp" aria-hidden="true"></i>    7501673237</h3>
-        <h3><i class="fa fa-github-square" aria-hidden="true"></i>    github.com/jaxstronomer</h3>
-        <h3><i class="fa fa-linkedin-square" aria-hidden="true"></i>    LinkedIn</h3>
+        <h3><i class="fa fa-github-square" aria-hidden="true"></i><a href="https://github.com/jaxstronomer" target="_blank" style="text-decoration:none">    Github</a></h3>
+        <h3><i class="fa fa-linkedin-square" aria-hidden="true"></i><a href="https://in.linkedin.com/in/jagdish-verma-a898a1ba" target="_blank" style="text-decoration:none">    LinkedIn</a></h3>
       </div>
       <div id="socials">
         <h1>Socials</h1>
         <hr>
-        <h3><i class="fa fa-facebook-official" aria-hidden="true"></i>    Facebook</h3>
-        <h3><i class="fa fa-twitter" aria-hidden="true"></i>    twitter</h3>
-        <h3><i class="fa fa-google-plus" aria-hidden="true"></i>    Google+</h3>
-        <h3><i class="fa fa-quora" aria-hidden="true"></i>    Quora</h3>
+        <h3><i class="fa fa-facebook-official" aria-hidden="true"></i><a href="https://in.linkedin.com/in/jagdish-verma-a898a1ba" target="_blank" style="text-decoration:none">    Facebook</a></h3>
+        <h3><i class="fa fa-twitter" aria-hidden="true"></i><a href="https://twitter.com/jaxstronomer" target="_blank" style="text-decoration:none">    Twitter</a></h3>
+        <h3><i class="fa fa-google-plus" aria-hidden="true"></i><a href="https://plus.google.com/109238731056330362713" target="_blank" style="text-decoration:none">    Google+</a></h3>
+        <h3><i class="fa fa-quora" aria-hidden="true"></i><a href="https://www.quora.com/profile/Jagdish-Verma-5" target="_blank" style="text-decoration:none">    Quora</a></h3>
         </div>
       </div>
     </div>
@@ -178,20 +185,25 @@ app.get('/about',function(req,res){
       <h1>About Me</h1>
       <hr>
       <p>Hi,<br> My name is Jagdish Kumar Verma</p>
-      <p>I am currently completing my B.Tech in Computer Science and Engineering from Haldia Institute of Technology, Haldia. I'm in fifth semester of the course.</p>
+      <p>I am  third year engineering unergraduate in Computer Science and Engineering from Haldia Institute of Technology.</p>
+      <p>I enjoy learning new things and learning web-app development with NPTEL & IMAD was a lot of fun.</p>
+      <p>Some things that interest me in general : reading, coding, clouds, star-gazing, numismatics, rock-hounding, photography, writing, travelling (not particularly in that order).<br>
+      (P.S.:If I we happen to share any common interests, feel free to ping me on any social media)
       </div>
       <div id="a_row2">
-        <h1>About the Website</h1>
+        <h1>About this Website</h1>
         <hr>
         <p>This website was developed as a final assignment for the MOOC "Introduction to Modern Application Development" conducted by NPTEL.</p>
+        <p>It is completely AJAX-based. Everything is served in real-time and no page-refresh is required.</p>
       </div>
       <div id="a_row3">
         <h1>Features</h1>
         <hr>
         <p>Read from various articles.</p>
-        <p>Articles served dynamically, in real-time</p>
-        <p>AJAX based architecture</p>
-        <p></p>
+        <p>Articles served dynamically</p>
+        <p>Login and comment on any article</p>
+        <p>Responsive Design</p>
+        <p>Completely AJAX-based</p>
       </div>
       <div id="a_row4">
         <h1>Technology Stack</h1>
@@ -205,7 +217,6 @@ app.get('/about',function(req,res){
   </div>`;
   res.send(about);
 });
-
 
 
 /*-----url mappings-----*/
@@ -254,6 +265,10 @@ app.get('/ui/bg.jpg', function (req, res) {
 });
 
 
+
+
+
+
 /*hash function*/
 function hash (input, salt) {
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
@@ -264,32 +279,37 @@ app.get('/hash/:input', function(req, res) {
    res.send(hashedString);
 });
 
+/*Create User*/
 
 app.post('/create-user', function (req, res) {
- var username = req.body.username;
-  var password = req.body.password;
-  var salt = crypto.randomBytes(128).toString('hex');
+   var username = req.body.username;
+   var password = req.body.password;
+   if(username!="" && password!=""){
+   var salt = crypto.randomBytes(128).toString('hex');
    var dbString = hash(password, salt);
    pool.query('INSERT INTO "user"(username, password) VALUES($1, $2)', [username, dbString], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
-      }else {
+      }
+       else {
           res.send('User successfully created: ' + username);
-      }  
-       
-   }); 
-   
+      }
+   });}
+   res.status(500).send('Enter Username and password');
 });
 
+/*------login----*/
 app.post('/login',function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
+  console.log('\n'+username+' '+password);
 	pool.query('Select * FROM "user" WHERE username =$1', [username], function (err, result) {
-		 if (err) {
+		 if(err) {
 				 res.status(500).send(err.toString());
 		 } else {
-			 if(result.rows.length ===0){
-				 err.send(403).send("username/password is incorrect");
+       console.log(result.rows.length+"Rowdata: "+JSON.stringify(result.rows[0]));
+			 if(result.rows.length==0){
+				 res.status(403).send("username/password is incorrect");
 			 } else{
 				 var dbString = result.rows[0].password;
 				 var salt = dbString.split('$')[2];
@@ -326,3 +346,6 @@ app.listen(8080, function () {
   console.log(`Server up and running on port ${port}!`);
 });
 
+
+//<li id="login"><a href="javascript:void(0)" onclick="login()"><i class="fa fa-sign-in" aria-hidden="true">  Login</i></a></li>
+//<li id="logout"><a href="javascript:void(0)" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true">  Logout</i></a></li>

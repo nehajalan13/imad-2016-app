@@ -194,10 +194,9 @@ function logout(){
   var req1=new XMLHttpRequest();
     req1.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
-  //    element.innerHTML=this.responseText;
           $('.loading').hide();
           login_init();
-
+          alert("Logged out successfully");
         }
   };
   req1.open('GET','/logout',true);
