@@ -16,19 +16,19 @@ app.use(session({
     secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24},
     resave: true,
-saveUninitialized: true
+	saveUninitialized: true
 }))
 /*-----database connection-----*/
 
 
-
 //imad database
+
 var config={
 	user:'jaxstronomer',
 	database:'jaxstronomer',
 	host:'db.imad.hasura-app.io',
 	port:'5432',
-	password: 'process.env.DB_PASSWORD'
+	password: process.env.DB_PASSWORD
 };
 
 
@@ -42,6 +42,7 @@ app.get('/article',function(req,res){
       res.status(500).send(err.toString());
     }
     else{
+//      console.log('$'+req.session +'$'+ req.session.auth +'$'+ req.session.auth.userId);
       var article=result.rows[0];
       res.send(articleTemplate(article));
     }
@@ -58,29 +59,77 @@ function articleTemplate(data){
   			</div>
   			<div id="date">
   				<p><i class="fa fa-clock-o" aria-hidden="true"></i>
-${date.toDateString()}</p>
+          ${date.toDateString()}</p>
   			</div>
   			<hr/>
   			<div id="content">
           ${content}
         </div><hr>
-  			<div id="insert_comment">
-            <textarea rows="10" name="comment" id="comment" placeholder="Add Comment"></textarea><br>
-          <button id="submit" type="submit">Submit</button>
-  			</div>
+
+
         <div><h2><i class="fa fa-comments" aria-hidden="true"></i>    Comments</h2>
-  			<div id="comment_area">
-
-				</div>
-
-			<br/>
-			<p class="continue">
+        			<div id="comment_area${data.article_id}">
+        </div>`;
+        var comment_box=`  <div id="insert_comment">
+            <textarea rows="10" name="comment" id="comment_text${data.article_id}" placeholder="Add Comment"></textarea><br>
+            <button id="submit_comment" type="submit"  article_id="${data.article_id}" onclick="post_comment()">Submit</button>
+         </div>`;
+      //  if(req.session && req.session.auth && req.session.auth.userId){
+          article+=comment_box;
+		      article+=`<br/>
+			      <p class="continue">
 					<a href="javascript:void(0)" onclick="less(${data.article_id})" article_id="${data.article_id}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
-Show Less...</a>
+          Show Less...</a>
 				</p>
   		</div>`;
+
+
     return article;
 }
+
+
+/*------postcomments-----*/
+app.post('/submit-comment/:articleName', function (req, res) {
+    if (req.session && req.session.auth && req.session.auth.userId) {
+        pool.query('SELECT article_id FROM article WHERE article_id = $1', [req.params.articleName], function (err, result) {
+            if (err) {
+                res.status(500).send(err.toString());
+            } else {
+                if (result.rows.length === 0) {
+                    res.status(400).send('Article not found');
+
+                } else {
+                    var articleId = result.rows[0].article_id;
+                    pool.query(
+                        "INSERT INTO comments (comment, article_id, user_id) VALUES ($1, $2, $3)",
+                        [req.body.comment, articleId, req.session.auth.userId],
+                        function (err, result) {
+                            if (err) {
+                                res.status(500).send(err.toString());
+                            } else {
+                                res.status(200).send('Comment inserted!')
+                            }
+                        });
+                }
+            }
+       });
+    } else {
+        res.status(403).send('Please login to comment');
+    }
+});
+
+
+/*------load comment----*/
+
+app.get('/get-comments/:articleName', function (req, res) {
+   pool.query('SELECT comments.*, "user".username FROM article, comments, "user" WHERE article.article_id = $1 AND article.article_id = comments.article_id AND comments.user_id = "user".user_id', [req.params.articleName], function (err, result) {
+      if (err) {
+          res.status(500).send(err.toString());
+      } else {
+          res.send(JSON.stringify(result.rows));
+      }
+   });
+});
 
 
 /*-----serving articles List-----*/
@@ -111,7 +160,7 @@ function articleListTemplate(data){
 			  <p>${content}.....</p>
 			</div>
             <p class="continue">
-              <a href="javascript:void(0)" onclick="article(${article_id})">Continue Reading...<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              <a href="#/article/${article_id}" onclick="article(${article_id})">Continue Reading...<i class="fa fa-angle-double-right" aria-hidden="true"></i>
 </a>
             </p>
           </div>
@@ -188,8 +237,8 @@ app.get('/about',function(req,res){
       <p>Hi,<br> My name is Jagdish Kumar Verma</p>
       <p>I am  third year engineering unergraduate in Computer Science and Engineering from Haldia Institute of Technology.</p>
       <p>I enjoy learning new things and learning web-app development with NPTEL & IMAD was a lot of fun.</p>
-      <p>Some things that interest me in general : reading, coding, clouds, star-gazing, numismatics, rock-hounding, photography, writing, travelling (not particularly in that order).<br>
-      (P.S.:If I we happen to share any common interests, feel free to ping me on any social media)
+      <p>Some things that interest me in general : reading, coding, clouds, star-gazing, numismatics, rock-hounding, photography, writing and travelling (not particularly in that order).<br>
+      (P.S :If I we happen to share any common interests, feel free to ping me on any social media)
       </div>
       <div id="a_row2">
         <h1>About this Website</h1>
@@ -203,7 +252,7 @@ app.get('/about',function(req,res){
         <p>Read from various articles.</p>
         <p>Articles served dynamically</p>
         <p>Login and comment on any article</p>
-        <p>Responsive Design</p>
+        <p>Responsive UI</p>
         <p>Completely AJAX-based</p>
       </div>
       <div id="a_row4">
@@ -285,7 +334,9 @@ app.get('/hash/:input', function(req, res) {
 app.post('/create-user', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
-   if(username!="" && password!=""){
+   if(!username.trim() || !password.trim()){
+     res.status(500).send('Enter Username and password');
+   }else{
    var salt = crypto.randomBytes(128).toString('hex');
    var dbString = hash(password, salt);
    pool.query('INSERT INTO "user"(username, password) VALUES($1, $2)', [username, dbString], function (err, result) {
@@ -294,9 +345,10 @@ app.post('/create-user', function (req, res) {
       }
        else {
           res.send('User successfully created: ' + username);
-      }
-   });}
-   res.status(500).send('Enter Username and password');
+        }
+   });
+ }
+
 });
 
 /*------login----*/
@@ -308,7 +360,7 @@ app.post('/login',function(req, res){
 		 if(err) {
 				 res.status(500).send(err.toString());
 		 } else {
-       console.log(result.rows.length+"Rowdata: "+JSON.stringify(result.rows[0]));
+    //   console.log(result.rows.length+"Rowdata: "+JSON.stringify(result.rows[0]));
 			 if(result.rows.length==0){
 				 res.status(403).send("username/password is incorrect");
 			 } else{
@@ -317,13 +369,13 @@ app.post('/login',function(req, res){
 				 var hashedPassword = hash(password,salt);
 				 if(hashedPassword === dbString){
 					 req.session.auth = {userId: result.rows[0].user_id};
-					 res.send('Logged in Successfully');
+					 res.send('Logged in as,  '+username);
 				 }
 				 else
-				 res.status(403).send('username/password is incorrect');
-		 }
-	 }
-	});});
+				     res.status(403).send('username/password is incorrect');
+
+	          }
+	}});});
 
 app.get('/check-login',function(req,res){
 	if(req.session && req.session.auth && req.session.auth.userId){
@@ -339,6 +391,14 @@ app.get('/logout', function(req,res){
 	res.send("logged out");
 })
 
+function checkAuth(req, res, next) {
+  if (!req.session.user_id) {
+    res.send('Not logged in');
+  } else {
+    next();
+  }
+}
+
 
 /*-----listening on port-----*/
 
@@ -348,5 +408,3 @@ app.listen(8080, function () {
 });
 
 
-//<li id="login"><a href="javascript:void(0)" onclick="login()"><i class="fa fa-sign-in" aria-hidden="true">  Login</i></a></li>
-//<li id="logout"><a href="javascript:void(0)" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true">  Logout</i></a></li>
