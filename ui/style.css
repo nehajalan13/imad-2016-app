@@ -204,8 +204,9 @@ ul.topnav li.icon {
 #insert_comment>textarea{
   border: 2px solid rgba(0,0,0,0.1);
 	padding: 8px 10px;
-  width:50%;
+  width:300px;
   height:60px;
+  overflow: auto;;
   border-radius: 5px;
 }
 
@@ -527,7 +528,7 @@ background:rgba(255,255,255, 0.7);
 
 /*-----modal boxes-----*/
 .modal_login{
-display:none;
+  display:none;
   z-index: 2;
   background: rgba(0, 0, 0, 0.5);
   top:0;
@@ -568,10 +569,11 @@ display:none;
   height:100%;
   padding-top:5px;
   transition: 0.3s;
+  cursor:pointer;
   }
 
 
-#login_btn:hover,#register_btn:hover,#login_btn:focus,#register_btn:focus,#login_btn:active,#register_btn:active{
+#login_btn:focus,#register_btn:focus,#login_btn:active,#register_btn:active{
   background:white;
   color:#1d1e31;
   cursor:pointer;
@@ -611,15 +613,17 @@ input, button{
   font-size:20px;
 	padding:10px;
  margin:0 auto ;
-	background-color:#26519e;
+	background-color:#597cb9;
 	color:#1d1e31;
 	text-align:center;
     cursor:pointer;
     width:100%;
+//    opacity:0.8;
+    transition:0.3s;
 }
 
 #submit_btn:hover,#registerbtn:hover{
-  opacity:1;
+  background-color:#26519e;
 }
 #close_btn{
   text-align:center;
@@ -627,8 +631,16 @@ input, button{
   width:100%;
   margin:20px auto;
   background:red;
+  opacity:0.8;
   color:black;
   cursor:pointer;
+  padding:5px;
+  box-sizing: border-box;
+  font-size: 20px;
+  transition:0.3s;
+}
+#close_btn:hover{
+  opacity:1;
 }
 
 
