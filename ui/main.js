@@ -13,13 +13,15 @@ function article_list(){
 }
 
 function article(article_id){
-  $("div[article_id="+article_id+"]").hide();
+//  $("div[article_id="+article_id+"]").hide();
     $('.loading').show();
   var req2=new XMLHttpRequest();
   req2.onreadystatechange=function(){
     if(this.readyState===4 && this.status==200){
       $(this.responseText).insertBefore("div[article_id="+(article_id)+"]");
       $("div[article_id="+article_id+"]").hide();
+
+      loadComments();
       $('.loading').hide();
     }
   };
@@ -28,8 +30,11 @@ function article(article_id){
 }
 
 function less(aid){
-  $("a[article_id="+aid+"]").parent().parent().hide(),
-  $("div[article_id="+aid+"]").show()
+  $("a[article_id="+aid+"]").parents('div.article2').remove();
+  $("div[article_id="+aid+"]").show();
+
+
+
 }
 
 
@@ -83,6 +88,7 @@ window.onclick=function(e){
 }
 
 function loginbtn(){
+
   document.getElementById('login_form').style.display="block";
   document.getElementById('register_form').style.display="none";
 }
@@ -100,6 +106,76 @@ function login(){
 
 }
 
+/*--------------postcoments------*/
+function post_comment(){
+    var currentArticleTitle = window.location.hash.slice(10);
+    $('.loading').show();
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                document.getElementById('comment_text'+currentArticleTitle).value = '';
+                        $('.loading').hide();
+                      console.log(this.responseText);
+                loadComments();
+            } else {
+              $('.loading').hide();
+                alert(this.responseText);
+            }
+      }
+    };
+
+    var comment = document.getElementById('comment_text'+currentArticleTitle).value;
+    request.open('POST', '/submit-comment/' + currentArticleTitle, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify({comment: comment}));
+
+//};
+
+};
+
+
+
+/*--------loadcomments-----*/
+
+
+function escapeHTML (text)
+{
+    var $text = document.createTextNode(text);
+    var $div = document.createElement('div');
+    $div.appendChild($text);
+    return $div.innerHTML;
+}
+
+function loadComments () {
+  var currentArticleTitle = window.location.hash.slice(10);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            var comments = document.getElementById('comment_area'+currentArticleTitle);
+            if (request.status === 200) {
+                var content = '';
+                var commentsData = JSON.parse(this.responseText);
+                for (var i=0; i< commentsData.length; i++) {
+                    content += `<div class="comment">
+                    <p>${escapeHTML(commentsData[i].comment)}</p>
+                        <div class="commenter">
+                            <p style="font-style: italic;font-weight:bold;">-${commentsData[i].username}<p>
+                        </div>
+                    </div><hr style="border:0.5px solid rgba(0,0,0,0.3); width:50%; margin-left:0">`;
+                }
+                comments.innerHTML = content;
+            } else {
+                comments.innerHTML('Oops! Could not load comments!');
+            }
+        }
+    };
+
+    request.open('GET', '/get-comments/' + currentArticleTitle, true);
+    request.send(null);
+}
+
+
 
 /*-----create new user----*/
 
@@ -113,8 +189,11 @@ register.onclick=function(){
         if (request.status == 200) {
           close_function();
           alert(this.responseText);
-        } else {
-            alert('Username not available');
+        } else if(request.status == 403) {
+            alert(this.responseText);
+        }
+        else{
+          alert("username not available");
         }
     }
   }
@@ -126,24 +205,6 @@ register.onclick=function(){
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username:username, password:password}));
 };
-
-/*$('#registerbtn').click(function(){
-  var username = document.getElementById('newusrn').value;
-  var password = document.getElementById('newpass').value;
-  $.ajax({
-    url:'/create-user',
-    data:JSON.stringify({username:username,password:password}),
-    contentType:'application/json',
-    type:'POST',
-    success:function(data,response){
-        alert(JSON.stringify(data));
-      },
-     error:function(err){
-        alert('Failed to create user.'+JSON.stringify(err));
-      }
-  }
-)
-});*/
 
 
 
@@ -159,9 +220,13 @@ submit.onclick = function () {
                   $('.loading').hide();
                 close_function();
                 login_init();
+                $('body').append(`<div id="loggedin_as" style="z-index:200;top:0;position:fixed;right:20px;font-size:12px;">
+                    <h3 style="margin:5px 0 0 0;padding:0;color:#fff;  font-family: 'Josefin Sans', sans-serif;">${this.responseText}</h3>
+                    </div>`);
 
 
-                alert("Logged in Successfully");
+              console.log(this.responseText);
+
             } else if (request.status === 403) {
               $('.loading').hide();
 
@@ -196,6 +261,7 @@ function logout(){
     if(this.readyState===4 && this.status==200){
           $('.loading').hide();
           login_init();
+          $('#loggedin_as').remove();
           alert("Logged out successfully");
         }
   };
@@ -224,7 +290,8 @@ function login_init(){
 //  }
 }
 
+
+
 login_init();
-
-
-/*------*/
+//post_comment();
+/*----*/
