@@ -1,4 +1,5 @@
 function article_list(){
+  window.scrollTo(0, 0);
   var element=document.getElementById('row3');
   $('.loading').show();
   var req3=new XMLHttpRequest();
@@ -40,6 +41,7 @@ function less(aid){
 
 
 function about(){
+    window.scrollTo(0, 0);
   var element=document.getElementById('row3');
     $('.loading').show();
   var req1=new XMLHttpRequest();
@@ -56,6 +58,7 @@ function about(){
 
 
 function profile(){
+    window.scrollTo(0, 0);
   var element=document.getElementById('row3');
       $('.loading').show();
   var req3=new XMLHttpRequest();
@@ -275,8 +278,6 @@ function login_init(){
   var x = new XMLHttpRequest();
   var y =0;
   x.onreadystatechange=function(){
-  //  if(this.readyState===4 && this.status==200){
-    //  y=Number(this.responseText);
       if(this.readyState===4 && this.status==403){
         $('li#about').before('<li id="login"><a href="javascript:void(0)" onclick="login()"><i class="fa fa-sign-in" aria-hidden="true">  Login</i></a></li>');
         $('li#logout').remove();
