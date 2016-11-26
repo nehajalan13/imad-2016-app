@@ -290,9 +290,6 @@ app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
-app.get('/u/m/q/r/a/panda.html', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'panda.html'));
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
