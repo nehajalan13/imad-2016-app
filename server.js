@@ -181,7 +181,7 @@ app.get('/profile',function(req,res){
       <hr>
       <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i>    Jagdish Kumar Verma</h3>
       <h3><i class="fa fa-graduation-cap" aria-hidden="true"></i>    Haldia Institute of Technology<h3>
-      <h3><i class="fa fa-code" aria-hidden="true"></i>    Developer,Coder, UI/UX Designer</h3>
+      <h3><i class="fa fa-code" aria-hidden="true"></i>    Developer,Coder, Designer</h3>
       <h3><i class="fa fa-list" aria-hidden="true"></i><a href="https://drive.google.com/file/d/0B4St1j_16gfcRzljaGh2T0E4Xzg/view?usp=sharing" target="_blank" style="text-decoration:none">    Resume</a></h3>
       </div>
       <div id="skillset">
@@ -203,6 +203,8 @@ app.get('/profile',function(req,res){
         <br><h2>Others:</h2>
         <h3><i class="icon-splatter"></i>       Blender (Beginner)</h3>
         <h3><i class="fa fa-id-badge" aria-hidden="true"></i>        Visual Basic</h3>
+        <h3><i class="fa fa-cog" aria-hidden="true"></i>    Netbeans IDE</h3>
+
       </div>
       <div id="contacts">
         <h1>Contacts</h1>
